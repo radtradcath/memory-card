@@ -60,7 +60,7 @@ function App() {
       setScore((score) => score + 1);
       setClickedIds([...clickedIds, targetId]);
       setCards(shuffleArray([...cards]));
-      score > bestScore ? setBestScore(score) : "";
+      score + 1 > bestScore ? setBestScore(prev => prev + 1) : "";
     }
   }
 

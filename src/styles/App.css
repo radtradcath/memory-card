@@ -1,0 +1,8 @@
+.main-container {
+    height: 300px;
+    overflow-y: hidden;
+}
+
+button {
+    height: 300px;
+}

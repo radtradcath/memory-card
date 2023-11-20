@@ -1,8 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300;1,700&display=swap');
+
+body {
+    margin: 0;
+    background-color: #F43F5E;
+    color: #D6D3D1;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+* {
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+
+.app {
+    padding: 1.5em;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+header p {
+    text-align: end;
+}
+
+h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.score, .best {
+    font-weight: 600;
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+header img {
+    max-width: 10em;
+}
+
+.instructions {
+    margin-bottom: 0;
+}
+
 .main-container {
-    height: 300px;
-    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1em;
 }
 
 button {
-    height: 300px;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 0;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    background-color: #D6D3D1;
+    transition: transform 0.3s;
 }
+
+button:hover {
+    transform: scale(1.02);
+    border: 3px solid yellow;
+}
+
+.hero-name {
+    font-weight: 600;
+}
+
+.hero-img-container {
+   max-width: 100%;
+}
+
+.hero-img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+footer {
+    margin-top: 2em;
+    width: 100%;
+    background-color: black;
+    height: 15%
+}
+
+footer ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5em;
+    margin: 0;
+    height: 5vh;
+}
+
+a {
+    text-decoration: none;
+    color: #D6D3D1;
+}
+
+a:hover {
+    animation: 2s linear 0.2s both infinite rainbow;
+}
+
+@keyframes rainbow {
+    from {
+        color:#F43F5E;
+    }
+
+    15% {
+        color: aqua;
+    }
+
+    30% {
+        color: rgb(9, 255, 0);
+    }
+
+    45% {
+        color: rgb(255, 0, 234);
+    }
+
+    60% {
+        color: rgb(255, 0, 0);
+    }
+
+    80% {
+        color: blue;
+    }
+
+    to {
+        color: antiquewhite;
+    }
+}
+

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import Container from "./components/Container";
+import Footer from "./components/Footer";
 import "./styles/App.css";
 
 function App() {
@@ -19,10 +20,10 @@ function App() {
           return response.json();
         })
         .then((response) => {
-          console.log(response);
+          const sliced = response.data.slice(0, 13);
           return setCards([
             ...cards,
-            ...response.data.filter((data) => data.isPlayableCharacter),
+            ...sliced.filter((data) => data.isPlayableCharacter),
           ]);
         })
         .catch((err) => {
@@ -51,7 +52,7 @@ function App() {
 
   function handleClick(e) {
     const targetId = e.currentTarget.id;
-    console.log(targetId)
+    console.log(targetId);
     if (clickedIds.includes(targetId)) {
       setScore(0);
       setClickedIds([]);
@@ -60,26 +61,29 @@ function App() {
       setScore((score) => score + 1);
       setClickedIds([...clickedIds, targetId]);
       setCards(shuffleArray([...cards]));
-      score + 1 > bestScore ? setBestScore(prev => prev + 1) : "";
+      score + 1 > bestScore ? setBestScore((prev) => prev + 1) : "";
     }
   }
 
   return (
-    <div className="app">
-      <Header score={score} bestScore={bestScore} />
-      <Container>
-        {cards.map((card) => (
-          <Card
-            key={card.uuid}
-            id={card.uuid}
-            src={card.displayIcon}
-            heroName={card.displayName}
-            heroRole={card.role.displayName}
-            handler={handleClick}
-          />
-        ))}
-      </Container>
-    </div>
+    <>
+      <div className="app">
+        <Header score={score} bestScore={bestScore} />
+        <Container>
+          {cards.map((card) => (
+            <Card
+              key={card.uuid}
+              id={card.uuid}
+              src={card.displayIcon}
+              heroName={card.displayName}
+              heroRole={card.role.displayName}
+              handler={handleClick}
+            />
+          ))}
+        </Container>
+      </div>
+      <Footer />
+    </>
   );
 }
 

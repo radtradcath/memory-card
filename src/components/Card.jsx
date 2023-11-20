@@ -1,9 +1,12 @@
-export default function Card() {
+export default function Card({src, heroName, heroRole, id}) {
+  
   return (
-    <button>
-      <div className="hero-img-container"></div>
-      <div className="hero-attribute-container"></div>
-      <p className="hero-name"></p>
+    <button id={id}>
+      <div className="hero-img-container">
+        <img src={src} alt={`${heroName} picture`} />
+      </div>
+      <p className="hero-role">{heroRole}</p>
+      <p className="hero-name">{heroName}</p>
     </button>
   );
 }

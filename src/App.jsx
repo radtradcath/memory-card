@@ -8,6 +8,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [cards, setCards] = useState([]);
+  const [clickedIds, setClickedIds] = useState([]);
 
   useEffect(() => {
     const url = "https://valorant-api.com/v1/agents";
@@ -19,7 +20,10 @@ function App() {
         })
         .then((response) => {
           console.log(response);
-          return setCards([...cards, ...response.data]);
+          return setCards([
+            ...cards,
+            ...response.data.filter((data) => data.isPlayableCharacter),
+          ]);
         })
         .catch((err) => {
           console.log(err);
@@ -29,7 +33,36 @@ function App() {
     return () => clearTimeout(key);
   }, []);
 
-  console.log(cards)
+  function shuffleArray(array) {
+    const copy = [...array];
+    const shuffled = new Array(array.length);
+
+    for (let i = 0; i < array.length; i++) {
+      let pos = undefined;
+      do {
+        pos = Math.floor(Math.random() * array.length);
+      } while (!!shuffled[pos]);
+
+      shuffled[pos] = copy[i];
+    }
+
+    return shuffled;
+  }
+
+  function handleClick(e) {
+    const targetId = e.currentTarget.id;
+    console.log(targetId)
+    if (clickedIds.includes(targetId)) {
+      setScore(0);
+      setClickedIds([]);
+      setCards(shuffleArray([...cards]));
+    } else {
+      setScore((score) => score + 1);
+      setClickedIds([...clickedIds, targetId]);
+      setCards(shuffleArray([...cards]));
+      score > bestScore ? setBestScore(score) : "";
+    }
+  }
 
   return (
     <div className="app">
@@ -42,6 +75,7 @@ function App() {
             src={card.displayIcon}
             heroName={card.displayName}
             heroRole={card.role.displayName}
+            handler={handleClick}
           />
         ))}
       </Container>
